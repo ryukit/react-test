@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.15/browser.js"></script>
+    <style type="text/css">
+        *,
+        *:before,
+        *:after {
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+<div id="content">
+
+</div>
+<script type="text/babel">
+    var ARTICLES = [
+        {
+            id: 1,
+            title: 'Hello world1',
+            author: 'auth1',
+            content: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate elei'
+        }, {
+            id: 2,
+            title: 'Hello world2',
+            author: 'auth2',
+            content: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate elei'
+        }, {
+            id: 3,
+            title: 'Hello world3',
+            author: 'auth3',
+            content: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate elei'
+        }, {
+            id: 4,
+            title: 'Hello world4',
+            author: 'auth4',
+            content: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate elei'
+        }
+    ];
+
+    var ArticleItem = React.createClass({
+        render: function() {
+            return (
+                <article className="articleItem">
+                    <h1>{this.props.title}</h1>
+                    <div>{this.props.author}</div>
+                    <div>{this.props.content}</div>
+                </article>
+            );
+        }
+    });
+
+    var ArticlesList = React.createClass({
+        render: function() {
+            return (
+                <div className="content">
+                    <div className="articlesList">
+                        {
+                            ARTICLES.map(function(el) {
+                                return (
+                                    <ArticleItem
+                                        key={el.id}
+                                        title={el.title}
+                                        author={el.author}
+                                        content={el.content}
+                                    />
+                                );
+                            })
+                        }
+                    </div>
+                </div>
+            );
+        }
+    });
+
+    ReactDOM.render(
+        <ArticlesList />,
+        document.getElementById('content')
+    );
+</script>
+</body>
+</html>

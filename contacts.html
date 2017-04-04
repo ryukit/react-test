@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.15/browser.js"></script>
+    <style type="text/css">
+        *,
+        *:before,
+        *:after {
+            box-sizing: border-box;
+        }
+        .contactHolder {
+            max-width: 360px;
+            margin: 0 auto;
+        }
+        .contactList {
+            padding: 10px;
+            list-style: none;
+            border: 1px solid #708090;
+        }
+        .searcField {
+            width: 100%;
+            border: 1px solid #6495ed;
+            padding: 10px 15px;
+        }
+        .contactItem {
+            margin-bottom: 20px;
+            border: 1px solid #808080;
+            padding: 5px;
+            -webkit-border-radius: 50px 0 0 50px;
+            -moz-border-radius: 50px 0 0 50px;
+            border-radius: 50px 0 0 50px;
+        }
+        .contactItem:last-child {
+            margin-bottom: 0;
+        }
+        .contactItem:after {
+            content: '';
+            clear: both;
+            display: table;
+        }
+        .contactItem-image {
+            float: left;
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            line-height: 0;
+            overflow: hidden;
+            -webkit-border-radius: 40px;
+            -moz-border-radius: 40px;
+            border-radius: 40px;
+        }
+        .contactItem-name {
+            overflow: hidden;
+            color: #f00;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .contactItem-number {
+            overflow: hidden;
+            color: #0000ff;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div id="content">
+
+    </div>
+    <script type="text/babel">
+        var CONTACTS = [
+            {
+                id: 1,
+                name: "User 1",
+                phoneNumber: '+1111111111',
+                image: 'http://placehold.it/40x40'
+            }, {
+                id: 2,
+                name: "User 2",
+                phoneNumber: '+2222222222',
+                image: 'http://placehold.it/40x40'
+            }, {
+                id: 3,
+                name: "User 3",
+                phoneNumber: '+3333333333',
+                image: 'http://placehold.it/40x40'
+            }, {
+                id: 4,
+                name: "User 4",
+                phoneNumber: '+4444444444',
+                image: 'http://placehold.it/40x40'
+            }
+        ];
+
+        var Contact = React.createClass({
+            render: function() {
+                return (
+                    <li className="contactItem">
+                        <div className="contactItem-image"><img src={this.props.image} width="40px" height="40px" /></div>
+                        <div className="contactItem-name">{this.props.name}</div>
+                        <div className="contactItem-number">{this.props.phoneNumber}</div>
+                    </li>
+                );
+            }
+        });
+
+        var ContactsList = React.createClass({
+            getInitialState: function () {
+                return {
+                    displayedContacts: CONTACTS
+                };
+            },
+
+            handleSearch: function(event) {
+                var searchQuery = event.target.value.toLowerCase();
+                var displayedContacts = CONTACTS.filter(function(el){
+                    var searchValue = el.name.toLowerCase();
+                    return searchValue.indexOf(searchQuery) !== -1;
+                });
+                this.setState({
+                    displayedContacts: displayedContacts
+                });
+            },
+
+            render: function () {
+                return (
+                    <div className="contactHolder">
+                        <input type="text" className="searcField" onChange={this.handleSearch} />
+                        <ul className="contactList">
+                            {
+                                this.state.displayedContacts.map(function(el) {
+                                    return (
+                                        <Contact
+                                            key={el.id}
+                                            name={el.name}
+                                            phoneNumber={el.phoneNumber}
+                                            image={el.image}
+                                        />
+                                    );
+                                })
+                            }
+                        </ul>
+                    </div>
+                );
+            }
+        });
+
+        ReactDOM.render(
+            <ContactsList />,
+            document.getElementById('content')
+        );
+    </script>
+</body>
+</html>
